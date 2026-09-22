@@ -14,10 +14,42 @@ This repository contains connection examples, public server metadata, the eight-
 Use a remote Streamable HTTP client and an API key. Store the key in the client's secret environment. A common configuration shape is:
 
 ```json
-{"mcpServers":{"gmapscrawl":{"url":"https://gmapscrawl.com/api/mcp","transport":"streamable-http","headers":{"API-KEY":"YOUR_GMAPSCRAWL_API_KEY"}}}}
+{
+  "mcpServers": {
+    "gmapscrawl": {
+      "url": "https://gmapscrawl.com/api/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "API-KEY": "YOUR_GMAPSCRAWL_API_KEY"
+      }
+    }
+  }
+}
 ```
 
 Your client's config format and environment interpolation may differ. Use exactly one credential header: `API-KEY` or `Authorization: Bearer`; MCP also accepts `GMS-API-KEY` and `X-API-KEY`.
+
+## Codex
+
+Configure `GMSCRAPER_API_KEY` in the environment where Codex starts, then add the server:
+
+```bash
+codex mcp add gmapscrawl \
+  --url https://gmapscrawl.com/api/mcp \
+  --bearer-token-env-var GMSCRAPER_API_KEY
+```
+
+This stores the environment variable name rather than the key in the MCP configuration. Start a new session and ask the client to list G Maps Crawl tools.
+
+## Claude Code
+
+```bash
+claude mcp add --transport http --scope user gmapscrawl \
+  https://gmapscrawl.com/api/mcp \
+  --header "Authorization: Bearer $GMSCRAPER_API_KEY"
+```
+
+The shell expands the variable before Claude Code writes its configuration. Keep that user configuration private; do not use project scope for a secret-bearing header.
 
 ### Python
 
