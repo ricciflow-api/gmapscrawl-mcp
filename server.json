@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.gmapscrawl/google-maps-data",
+  "title": "G Maps Crawl",
+  "description": "Google Maps business search, durable jobs, normalized results, and exports. Live capabilities depend on account access.",
+  "version": "2.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://gmapscrawl.com/api/mcp",
+      "headers": [
+        {
+          "name": "API-KEY",
+          "description": "Your G Maps Crawl API key from the API dashboard.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/ricciflow-api/gmapscrawl-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://gmapscrawl.com"
+}
